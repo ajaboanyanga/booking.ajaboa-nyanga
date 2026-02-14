@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJABOA NYANGA ONE FAMILY LTD – rentals</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: #f4f7f6;
+            color: #1e2b2c;
+            line-height: 1.5;
+            padding: 1.5rem 1rem;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2rem 2rem 1.5rem 1.5rem;
+            box-shadow: 0 20px 40px -10px rgba(0,40,30,0.2);
+            overflow: hidden;
+            padding: 2rem 2rem 2.5rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #0f3d3b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-bottom: 3px solid #e3b574;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 i {
+            color: #c49a4c;
+        }
+
+        .company-meta {
+            background: #fcf9f2;
+            padding: 1.2rem 1.5rem;
+            border-radius: 30px;
+            margin-bottom: 2.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem 1.8rem;
+            border-left: 6px solid #e3b574;
+        }
+
+        .location-grid {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            padding: 0.5rem 1.2rem 0.5rem 0.8rem;
+            border-radius: 40px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .map-preview {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #1e4a4a;
+            font-weight: 500;
+            background: #eef3f0;
+            padding: 0.3rem 1rem 0.3rem 0.5rem;
+            border-radius: 30px;
+            transition: 0.2s;
+            border: 1px solid #c0d9d2;
+        }
+
+        .map-preview:hover {
+            background: #dfeae4;
+            border-color: #9fb7ad;
+        }
+
+        .map-preview i {
+            font-size: 2rem;
+            color: #34a853;
+        }
+
+        .map-preview span {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.3;
+        }
+
+        .map-preview small {
+            font-size: 0.8rem;
+            color: #3f655d;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #e6f0ed;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+        }
+
+        .contact-row i {
+            font-size: 1.6rem;
+            color: #147a5e;
+        }
+
+        .contact-row a {
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: #0b3d35;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-row a:hover {
+            text-decoration: underline;
+            color: #b36200;
+        }
+
+        /* category grid */
+        .section-title {
+            font-size: 1.8rem;
+            margin: 2rem 0 1.2rem;
+            color: #264e4a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #b48b44;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .rental-card {
+            background: #fcfcfc;
+            border-radius: 24px;
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+            box-shadow: 0 6px 14px rgba(0, 30, 20, 0.04);
+            border: 1px solid #e2ebe7;
+            transition: 0.15s;
+        }
+
+        .rental-card:hover {
+            border-color: #c6a669;
+            box-shadow: 0 12px 20px -8px rgba(100, 80, 30, 0.12);
+        }
+
+        .rental-card i {
+            font-size: 2.4rem;
+            color: #3c786b;
+            margin-bottom: 0.5rem;
+        }
+
+        .rental-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .rental-card .qty-badge {
+            background: #e8ddd0;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #5d3e1e;
+            margin-top: 6px;
+        }
+
+        .booking-panel {
+            background: linear-gradient(165deg, #f3f7f5 0%, #ffffff 80%);
+            border-radius: 40px;
+            margin-top: 2.8rem;
+            padding: 2.2rem 2rem;
+            border: 1px solid #d5e1db;
+        }
+
+        .booking-panel h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #173e39;
+            margin-bottom: 2rem;
+        }
+
+        .booking-panel h2 i {
+            color: #cb8d2e;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-end;
+        }
+
+        .input-group {
+            flex: 1 1 200px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #3f615a;
+            margin-bottom: 0.25rem;
+        }
+
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid #cbdad4;
+            border-radius: 30px;
+            font-size: 1rem;
+            background: white;
+            transition: 0.2s;
+        }
+
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+            border-color: #a68043;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(190, 150, 70, 0.2);
+        }
+
+        .input-group textarea {
+            border-radius: 24px;
+            resize: vertical;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 1rem 2.2rem;
+            border-radius: 60px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            box-shadow: 0 8px 14px -6px rgba(37, 211, 102, 0.4);
+            transition: 0.2s;
+            border: 1px solid #1da959;
+        }
+
+        .whatsapp-btn i {
+            font-size: 2rem;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1da959;
+            transform: scale(1.02);
+            box-shadow: 0 12px 18px -6px #1e6e44;
+        }
+
+        .payment-note {
+            background: #fff4e0;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 1.1rem;
+            margin-top: 1.8rem;
+            border: 1px dashed #b48b44;
+        }
+
+        .payment-note i {
+            font-size: 2rem;
+            color: #f1b814;
+        }
+
+        .payment-note strong {
+            color: #0e493e;
+            background: white;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            margin-left: 6px;
+            letter-spacing: 0.5px;
+            border: 1px solid #bfa98b;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2.8rem;
+            color: #53736a;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- HEADER -->
+    <h1>
+        <i class="fas fa-umbrella-beach"></i> 
+        AJABOA NYANGA ONE FAMILY LTD
+    </h1>
+
+    <!-- LOCATION + MTN (always visible) -->
+    <div class="company-meta">
+        <!-- clickable google maps grid link (embedded grid preview) -->
+        <div class="location-grid">
+            <a class="map-preview" href="https://maps.google.com/?q=0.4082,32.6821" target="_blank" title="Open in Google Maps">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>
+                    <strong><i class="fas fa-location-dot"></i> Opposite Abea Health Center III</strong>
+                    <small>Nyadri–Katrini road (grid view)</small>
+                </span>
+            </a>
+            <span style="font-size:0.95rem; color:#2d5a50;"><i class="far fa-compass"></i> Nyanga One, Wakiso</span>
+        </div>
+        <!-- mobile money fixed number -->
+        <div class="contact-row">
+            <i class="fas fa-mobile-alt"></i>
+            <a href="tel:+256767680069">256767680069</a>
+            <span style="background: #ffd966; padding:0.2rem 1rem; border-radius: 40px; font-size:0.9rem;"><i class="fas fa-money-bill-wave"></i> MTN MoMo</span>
+        </div>
+    </div>
+
+    <!-- RENTAL ITEMS (all listed) -->
+    <div class="section-title">
+        <i class="fas fa-chair"></i> 
+        <span>What we rent – always available</span>
+    </div>
+    
+    <div class="items-grid">
+        <!-- plastic chairs -->
+        <div class="rental-card"><i class="fas fa-chair"></i><h3>Plastic chairs</h3><div class="qty-badge">in stock</div></div>
+        <!-- tents -->
+        <div class="rental-card"><i class="fas fa-campground"></i><h3>Tents (variety)</h3><div class="qty-badge">event size</div></div>
+        <!-- sound system -->
+        <div class="rental-card"><i class="fas fa-music"></i><h3>Sound system</h3><div class="qty-badge">speakers/mic</div></div>
+        <!-- plates -->
+        <div class="rental-card"><i class="fas fa-plate-wheat"></i><h3>Plates</h3><div class="qty-badge">ceramic/plastic</div></div>
+        <!-- sauce pans -->
+        <div class="rental-card"><i class="fas fa-utensils"></i><h3>Saucepans</h3><div class="qty-badge">aluminium</div></div>
+        <!-- serving dishes -->
+        <div class="rental-card"><i class="fas fa-bowl-food"></i><h3>Serving dishes</h3><div class="qty-badge">large trays</div></div>
+        <!-- cups -->
+        <div class="rental-card"><i class="fas fa-mug-hot"></i><h3>Cups</h3><div class="qty-badge">tea/plastic</div></div>
+        <!-- spoons -->
+        <div class="rental-card"><i class="fas fa-spoon"></i><h3>Spoons</h3><div class="qty-badge">tablespoons</div></div>
+        <!-- forks -->
+        <div class="rental-card"><i class="fas fa-utensils"></i><h3>Forks</h3><div class="qty-badge">stainless</div></div>
+        <!-- laddles (ladle) -->
+        <div class="rental-card"><i class="fas fa-kitchen-set"></i><h3>Ladles</h3><div class="qty-badge">souper</div></div>
+    </div>
+
+    <!-- BOOKING FORM (whatsapp integration) -->
+    <div class="booking-panel">
+        <h2>
+            <i class="fas fa-calendar-check"></i> 
+            Request booking (via WhatsApp)
+        </h2>
+
+        <div class="form-row">
+            <div class="input-group">
+                <label><i class="far fa-user"></i> Your name</label>
+                <input type="text" id="clientName" placeholder="e.g., Kato Musa">
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-phone-alt"></i> Phone (MTN preferred)</label>
+                <input type="tel" id="clientPhone" placeholder="077xxxxxx" value="+256">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="input-group">
+                <label><i class="fas fa-couch"></i> Item(s) needed</label>
+                <select id="itemSelect">
+                    <option value="Plastic chairs">🪑 Plastic chairs</option>
+                    <option value="Tents">⛺ Tents</option>
+                    <option value="Sound system">🎵 Sound system</option>
+                    <option value="Plates">🍽️ Plates</option>
+                    <option value="Saucepans">🥘 Saucepans</option>
+                    <option value="Serving dishes">🧆 Serving dishes</option>
+                    <option value="Cups">☕ Cups</option>
+                    <option value="Spoons">🥄 Spoons</option>
+                    <option value="Forks">🍴 Forks</option>
+                    <option value="Ladles">🥣 Ladles</option>
+                    <option value="Multiple items">📦 Multiple (tell in notes)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-hashtag"></i> Approx. quantity</label>
+                <input type="text" id="quantity" placeholder="e.g., 50 chairs, 2 tents">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="input-group">
+                <label><i class="fas fa-calendar-day"></i> Needed date</label>
+                <input type="date" id="eventDate">
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-clock"></i> Return time</label>
+                <input type="text" id="returnTime" placeholder="e.g., next day 6pm">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="input-group" style="flex:2;">
+                <label><i class="fas fa-pencil-alt"></i> Extra notes (location, special requests)</label>
+                <textarea id="notes" rows="2" placeholder="e.g., deliver to Katrini, need 40 forks..."></textarea>
+            </div>
+        </div>
+
+        <!-- payment static notice + action button -->
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;">
+            <div class="payment-note">
+                <i class="fas fa-mobile"></i>
+                <span>✅ All payments via <strong>MTN MoMo 256767680069</strong> (reference: your name)</span>
+            </div>
+            <button class="whatsapp-btn" id="sendWhatsAppBtn">
+                <i class="fab fa-whatsapp"></i> Send request
+            </button>
+        </div>
+        <p style="margin-top: 1rem; font-size:0.95rem; background: #faf1e3; padding:0.3rem 1.2rem; border-radius: 30px; display:inline-block;">
+            <i class="far fa-hand-point-right"></i> After sending, we'll confirm availability & total cost.
+        </p>
+    </div>
+
+    <!-- tiny footer / map link again -->
+    <footer>
+        <i class="fas fa-map-pin"></i> Opposite Abea Health Center III, Nyadri–Katrini road, AJABOA NYANGA ONE FAMILY LTD. 
+        <a href="https://maps.google.com/?q=0.4082,32.6821" target="_blank" style="color:#147a5e; text-decoration:underline;">open grid map</a> 
+        · MTN: 256767680069
+    </footer>
+</div>
+
+<!-- JavaScript to create WhatsApp message with all details -->
+<script>
+    (function() {
+        const WA_NUMBER = "256767680069";   // clean international format (without +)
+        const btn = document.getElementById('sendWhatsAppBtn');
+
+        function buildMessage() {
+            const name = document.getElementById('clientName').value.trim() || "Guest";
+            const phone = document.getElementById('clientPhone').value.trim() || "not provided";
+            const item = document.getElementById('itemSelect').value;
+            const qty = document.getElementById('quantity').value.trim() || "to be discussed";
+            const date = document.getElementById('eventDate').value;
+            const returnTime = document.getElementById('returnTime').value.trim() || "not specified";
+            const notes = document.getElementById('notes').value.trim();
+
+            // format date nicely
+            let dateStr = date;
+            if (date) {
+                const d = new Date(date);
+                if (!isNaN(d.getTime())) {
+                    dateStr = d.toLocaleDateString('en-UG', { year:'numeric', month:'short', day:'numeric' });
+                }
+            } else {
+                dateStr = "not set";
+            }
+
+            let message = `Hello AJABOA NYANGA ONE FAMILY, I want to book some items:%0A%0A`;
+            message += `👤 *Name:* ${name}%0A`;
+            message += `📞 *Phone:* ${phone}%0A`;
+            message += `🛒 *Item(s):* ${item}%0A`;
+            message += `🔢 *Quantity:* ${qty}%0A`;
+            message += `📅 *Needed date:* ${dateStr}%0A`;
+            message += `⏱️ *Return approx:* ${returnTime}%0A`;
+            if (notes) {
+                message += `📝 *Notes:* ${notes}%0A`;
+            }
+            message += `%0A💵 *Payment via MTN MoMo 256767680069* (I will send to that number).%0A`;
+            message += `📍 Location: Opposite Abea Health Center III, Nyadri-Katrini road.`;
+
+            return message;
+        }
+
+        btn.addEventListener('click', function() {
+            const message = buildMessage();
+            // whatsapp link (web + app fallback)
+            const url = `https://wa.me/${WA_NUMBER}?text=${message}`;
+            window.open(url, '_blank');
+        });
+    })();
+</script>
+
+<!-- small note for easy location grid (already embedded) -->
+</body>
+</html>
